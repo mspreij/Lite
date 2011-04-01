@@ -1,0 +1,64 @@
+.DbTableDiv {
+	float: left;
+	margin-right: 10px;
+	border: 1px solid black;
+/*	padding: 10px;*/
+	
+	background: #EFF1FF;
+}
+.DbTableDiv a.structureLink {
+	display: block;
+	padding: 1px 10px;
+	border-bottom: 1px solid gray;
+	text-decoration: none;
+	color: black;
+}
+
+.DbTableDiv a.browseLink {
+	text-decoration: none;
+	color: blue;
+	float: left;
+}
+
+.DbTableDiv a.active {
+	font-weight: bold;
+	background: #DDDFEC;
+}
+
+#navLinks a {
+	color: black;
+	border: 1px solid #92ABDB;
+	padding: 2px 5px;
+	text-decoration: none;
+}
+
+#navLinks a.active {
+/*	font-weight: bold;*/
+	background: #A9C7FF;
+	
+}
+
+.browseTable {
+	border-collapse: collapse;
+}
+
+.browseTable td {
+	border: 1px solid gray;
+}
+
+.editTable {
+	border-collapse: collapse;
+	background: #FEE8D2;
+}
+.editTable td {
+	border: 1px solid silver;
+	padding: 2px 4px;
+}
+.editTable .td1 {
+	text-align: right;
+	font-weight: bold;
+}
+.footnote {
+	font-size: .7em;
+	color: gray;
+}
