@@ -6,7 +6,7 @@ Currently on the ad-hoc todo list:
  - maybe rewrite to use HTLM class? objects? search and stuff should be easier >.<
  - less hackery, more elegance, even if it costs 20 miliseconds more. Maybe init some classes (db, table, whatever) that can later be (re-)set, and use their methods instead of random static-var functions.
  - simple view for non-key tables. 
- - sqlite table to log queries
- - settings in regular file
+ - sqlite table to log queries?
+ - prefs/settings in regular file
  - results table in overflow: scroll; div, keep query input textarea visible.
  - SQL syntax coloring? google code and that other dude, maybe github, bookmarks
