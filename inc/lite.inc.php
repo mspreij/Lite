@@ -31,6 +31,8 @@ Then, server/username/password to connect to database are required.
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
+ob_start();
+
 require_once './inc/functions.inc.php';
 $cookie_name = 'xizzy';
 
