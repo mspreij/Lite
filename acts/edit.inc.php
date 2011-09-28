@@ -3,7 +3,7 @@
 
 if (! $pkey) {
 	$messages[] = styledText("Can't edit: Table has no primary key.", 'red');
-	break; // todo: make it so you *can* edit tables without primary key some day [2008-12-20 21:41:57]
+	return; // todo: make it so you *can* edit tables without primary key some day [2008-12-20 21:41:57]
 }
 $old_view = $view;
 $view = 'edit';
