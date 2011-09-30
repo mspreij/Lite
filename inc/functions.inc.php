@@ -265,6 +265,7 @@ function array_dump($array, $options='', $lines=0) {
 	$options = strtolower(" $options");
 	$pre     = strpos($options, 'p'); # preformatted
 	$return  = strpos($options, 'r'); # echo or return?
+	$nl2br   = strpos($options, 'b'); // \n -> html breaks
 	$out     = '';
 	$i       = 1;
 	$first   = true;
@@ -276,11 +277,15 @@ function array_dump($array, $options='', $lines=0) {
 		}
 		$out .= "<tr>";
 		if (is_string($value)) {
-			$out .= "<td valign='top'>$key</td><td". ($pre ? " style='white-space: pre;'" : '') .">". htmlspecialchars($value) ."</td>";
+			$value = htmlspecialchars($value, ENT_QUOTES);
+			if ($nl2br) $value = str_replace("\n", '<br>', $value);
+			$out .= "<td valign='top'>$key</td><td". ($pre ? " style='white-space: pre;'" : '') .">$value</td>";
 		}else if(is_array($value)) {
 			$out .= "<td valign='top'>$key</td>";
 			foreach($value as $col) {
-				$out .= "<td valign='top' ". ($pre ? " style='white-space: pre;'" : '') .">". htmlspecialchars($col) ."</td>";
+				$col = htmlspecialchars($col, ENT_QUOTES);
+				if ($nl2br) $col = str_replace("\n", '<br>', $col);
+				$out .= "<td valign='top' ". ($pre ? " style='white-space: pre;'" : '') .">$col</td>";
 			}
 		}
 		$out .= "</tr>\r";

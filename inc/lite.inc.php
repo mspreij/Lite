@@ -108,6 +108,8 @@ if (! $connected) {
 	die('</body></html>');
 }
 
+mysql_query("SET NAMES utf8");
+
 $debug = (int) @$_COOKIE['debug'];
 if (isset($_GET['debug'])) {
 	$debug = (int) $_GET['debug'];
@@ -171,15 +173,14 @@ function db_and_table() {
 	return true;
 }
 
-#_______________
-# select_dbs() /
-function select_dbs() {
-	global $db;
+//_____________
+// list_dbs() /
+function list_dbs() {
 	$db_tmp = unnest_array(fetch_rows("SHOW DATABASES"), true);
 	foreach($db_tmp as $dbase) {
 		$db_list[$dbase] = $dbase .' ('. (($tmp = fetch_rows("SHOW tables FROM `$dbase`")) ? count($tmp) : $tmp ) .')';
 	}
-	selectlist('db', $db_list, $db, true);
+	return $db_list;
 }
 
 #___________________________

@@ -7,7 +7,7 @@ echo "Congratulations! It's a".(in_array($type[0], array('i','a','o')) ? 'n':'')
 
 switch ($type) {
 	case 'array':
-		array_dump($data, 'p');
+		array_dump($data, 'pb');
 		break;
 	case 'string':
 		echo $data;

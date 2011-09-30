@@ -6,7 +6,7 @@ $page_arr['stylesheet'][] = 'css/style.css';
 $page_arr['stylesheet'][] = 'css/date_input.css';
 $page_arr['js_include'][] = 'js/jquery.date_input.js';
 $page_arr['js_include'][] = 'js/scripts.js';
-$page_arr['body'] = "onload=\"$('#queryInput').focus();\"";
+if (isset($_POST['query'])) $page_arr['body'] = "onload=\"$('#queryInput').focus();\"";
 
 pageStart($page_arr);
 
@@ -29,6 +29,15 @@ if (! $act) $messages[] = "Welcome to Lite®!\n"; // todo: check and warn for in
 if ($db) {
 	if (mysql_select_db($db)) {
 		// good
+		if ($table) {
+			if ($tables = fetch_rows("SHOW TABLES")) {
+				unnest_array($tables);
+				if (! in_array($table, $tables)) {
+					trigger_error("table '$table' not in table list", E_USER_WARNING);
+					unset($table);
+				}
+			}
+		}
 	}else{
 		$messages[] = styledText("No valid database provided.<br>\n", 'red');
 		$db = '';
@@ -91,14 +100,23 @@ if ($act == 'query') {
 # -- list databases and tables, load view.
 echo "<div class='DbTableDiv'>";
 
-echo "<form action='$me?act=db' method='get' style='display: inline;'>\n";
-select_dbs();
-echo 
- "<input type='submit' name='submit' value='Use'>
-</form><br>\n";
+$db_list = list_dbs();
+
 if ($db) {
+	echo "<form action='$me' method='get' style='display: inline;'>\n";
+	selectList('db', $db_list, $db, 1);
+	echo 
+	 "<input type='submit' name='submit' value='Use'>
+	</form><br>\n";
 	list_tables($db, $table);
+}else{
+	echo "<strong>Databases:<br></strong>";
+	$i = 0;
+	foreach ($db_list as $db => $label) {
+		echo "<a style='display: block;' href='$me?db=$db' tabindex='".++$i."'>$label</a>\n";
+	}
 }
+
 echo "</div>"; // -- end database/tables
 
 if ($table) nav_links();
