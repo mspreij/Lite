@@ -14,7 +14,7 @@ login_form();
 echo 
  "Connected to $server as $username.
 	Debug: <a href='". merge_link(array('debug'=>((int) ! $debug))) ."'>Toggle</a>;
-	".popup_link('inc/admin_sql.txt', 'Administration SQL', 880, 580, array('return'=>1))."
+	".popup_link('inc/admin_sql.php', 'Administration SQL', 910, 580, array('return'=>1))."
 	<hr size='1'>\n";
 
 # collect some incoming
