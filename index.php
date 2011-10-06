@@ -11,7 +11,11 @@ if (isset($_POST['query'])) $page_arr['body'] = "onload=\"$('#queryInput').focus
 pageStart($page_arr);
 
 login_form();
-echo "Connected to $server as $username. Debug: <a href='". merge_link(array('debug'=>((int) ! $debug))) ."'>Toggle</a><hr size='1'>\n";
+echo 
+ "Connected to $server as $username.
+	Debug: <a href='". merge_link(array('debug'=>((int) ! $debug))) ."'>Toggle</a>;
+	".popup_link('inc/admin_sql.txt', 'Administration SQL', 880, 580, array('return'=>1))."
+	<hr size='1'>\n";
 
 # collect some incoming
 foreach(explode(' ', 'db table act query view page pval') as $field) $$field = trim(@$_REQUEST[$field]);

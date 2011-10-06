@@ -2,8 +2,6 @@
 
 /** -- Functions -------------------------
  * 
- * str_split($str,$num = '1')                                      -- PHP 5
- * file_put_contents($file, $data)                                 -- PHP 5
  * pageStart($list)                                                
  * befuddle($data, $key, $way = 1)                                 
  * styledText($string, $color='black', $style='')                  
@@ -29,38 +27,6 @@
  * 
  * 
 **/
-
-
-if (! function_exists('str_split')) { // PHP 5
-	#_____________________________
-	# str_split($str,$num = '1') /
-	function str_split($str,$num = '1') {
-		if($num < 1) return FALSE;
-		$arr = array();
-		for ($i = 0; $i < strlen($str); $i += $num) {
-			$arr[] = substr($str,$i,$num);
-		}
-		return $arr;
-	}
-}
-
-
-//__________________________________  Beware: the return values here are probably not what they will be in PHP 5..
-// file_put_contents($file, $data) /
-if (! function_exists('file_put_contents')) {
-	function file_put_contents($file, $data) {
-		if ($f = @fopen($file, 'wb')) {
-			if (($written = fwrite($f, $data)) !== false) {
-				fclose($f);
-				return array(true, $written);
-			}else{
-				return array(false, 'Could not write to file.');
-			}
-		}else{
-			return array(false, 'Could not open file for writing.');
-		}
-	}
-}
 
 
 #____________________ May need updating?
@@ -403,6 +369,37 @@ function stripslashes_array($arr) {
 }
 
 
+#__________________________________________________________________
+# popup_link($link, $label, $width=300, $height=300, $options='') /
+function popup_link($link, $label, $width=300, $height=300, $options='') {
+	$output = '';
+	$defaults = array(
+		'toolbar'=>'no',
+		'location'=>'no',
+		'directories'=>'no',
+		'status'=>'no',
+		'menubar'=>'no',
+		'scrollbars'=>'yes',
+		'resizable'=>'yes',
+		'style'=>'',
+		'class'=>'',
+		'return'=>false); # that last key makes the function return the code instead of echo it
+	if (is_array($options)) {
+		$options = array_merge($defaults, $options);          # have the values of options override those in defaults, but
+		$defaults = array_intersect_key($options, $defaults); # ..kick out the keys not existing in defaults.
+	}
+	extract($defaults);
+	$output = "<a href='#' style='$style' class='$class'
+	onClick=\"MyWindow=window.open('$link','MyWindow','toolbar=$toolbar,location=$location,directories=$directories,status=$status,menubar=$menubar,scrollbars=$scrollbars,resizable=$resizable,width=$width,height=$height'); return false;\">$label</A>";
+	if ((bool) $return) {
+		return $output;
+	}else{
+		echo $output;
+	}
+}
+
+
+
 # -- MySQL Functions ---------------------
 
 
@@ -448,10 +445,13 @@ function mysql_fetch_all($res) {
 
 /* -- Log --------------------------------
 
+[2011-10-06 16:07:34] removed str_split() and file_put_contents() (Welcome to 2004!)
 [2009-10-06 17:45:34] added stripslashes_array($array)
 [2009-01-03 13:14:22] pageStart now comes with jQuery.
 [2009-01-03 12:52:53] adding some more functions from online..
 [2009-01-03 12:40:15] added key_unnest() (rewrite/merge from some other functions)
+
+Todo: CLEAN UP. Jesus.
 
 */
 
