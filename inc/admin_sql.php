@@ -68,3 +68,6 @@
 <span class='sample'>DROP USER 'leetHax0r1994'</span>                                                     -- delete user
 
 # More fun: <a href="http://dev.mysql.com/doc/refman/5.1/en/show.html" title="MySQL ::   MySQL 5.1 Reference Manual :: 12.4.5 SHOW Syntax" target='_blank'>http://dev.mysql.com/doc/refman/5.1/en/show.html</a>
+
+</body>
+</html>
