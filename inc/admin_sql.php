@@ -74,7 +74,7 @@
 	</script>
 </head>
 
-<body onload="window.focu();" id='top'>
+<body onload="window.focus();" id='top'>
 <p># I hardly ever use these so.. here are some reminders &amp; pointers I wrote for myself, while using Lite, say.<br>
 # I hope to [remember to] update it as I learn more good things and/or unlearn more bad things. <a href='#disclaimer' class='local' style='font-style: italic;' data-target='disclaimer' id='disclaimerLink'>(disclaimer)</a></p>
 
@@ -142,8 +142,11 @@
 <span class='sample'>SHOW variables WHERE variable_name LIKE <span class='stringColor'>'%coll%'</span> OR variable_name LIKE <span class='stringColor'>'%char%'</span></span>
 <span class='sample'>SHOW CREATE TABLE <span class='stringColor'>`tableName`</span></span>
 
-# With the last pay attention to <span class='sampleColor'>DEFAULT CHARSET=utf8</span> in the last line, and any mention of character related things
-# after the column definition lines.
+# With the latter pay attention to <span class='sampleColor'>DEFAULT CHARSET=utf8</span> in the last line, and any mention of character related
+# things after the column definition lines.
+# Also note: <em>even</em> if you can see the proper Arabic glyphs (or whatever you stored) in the command-line client
+# via a proper modern terminal emulator, <em>that does not mean</em> the table or field character sets are utf8.
+
 # To change the character set of a single column, use
 <span class="sample">ALTER TABLE <span class='stringColor'>`tableName`</span> MODIFY <span class='stringColor'>`colName`</span> varchar(12) CHARACTER SET <span class='stringColor'>utf8</span></span>
 # To change the default character set of a table:
