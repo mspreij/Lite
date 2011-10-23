@@ -35,7 +35,7 @@ function inputrow($name, $props) {
 	if ((substr($type, 0, 7) == 'varchar') or (substr($type, 0, 4) == 'char')) {                 // • Varchar, Char
 		$size = preg_replace('/[^0-9]+/', '', $type);
 		inputfield($fname, $data[$name], "type=text size=".min($size+2, 80)." maxlength=$size");
-	}elseif ($type == 'text') {                                                                  // • Text
+	}elseif ($type == 'text' or $type == 'mediumtext') {                                         // • Text
 		inputfield($fname, $data[$name], "type=textarea cols=80 rows=8");
 	}elseif ((substr($type, 0, 7) == 'tinyint') or (substr($type, 0, 3) == 'int')                // • Int, TinyInt, SmallInt
 	          or (substr($type, 0, 8) == 'smallint')) {
@@ -163,6 +163,7 @@ function inputField($name, $value, $prop_input = array()) {
 
 /* -- Log --------------------------------
 
+[2011-10-23 23:24:03] mediumtext. there's probably a smarter way, get on that sometime.
 [2009-09-16 03:10:34] Added smallint to inputField()
 [2009-01-06 04:49:56] inputrow() could be shortened, using assoc array for property lists, indexed by type
 
