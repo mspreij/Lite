@@ -92,6 +92,9 @@ do {                                                                    // •�
 	if ($act == 'export') {                                               // •• Export
 		require_once './acts/export.inc.php';
 	}
+	if ($act == 'showcreate') {                                           // •• what the /hell/ was I thinking?
+		require_once './acts/showcreate.inc.php';
+	}
 } while (false);
 
 

@@ -1,6 +1,10 @@
 $(document).ready(function(){
   // Your code here
   $('.date').date_input();
+  
+  $('.toggle').click(function() {
+    $('#'+$(this).data('target')).slideToggle();
+  });
 });
 
 

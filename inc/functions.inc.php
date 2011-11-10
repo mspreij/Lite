@@ -55,8 +55,7 @@ function pageStart($list) {
 	<title>". ($title?$title:'untitled') ."</title>
 	<meta http-equiv='content-type' content='text/html; charset=$charset'>
 	". $headertags ."
-	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'></script>
-	<link rel='stylesheet' type='text/css' href='css/default.css'>\n";
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js' type='text/javascript'></script>\n";
 	if ($js_include) {
 		if (! is_array($js_include)) $js_include = array($js_include);
 		foreach($js_include as $js_incl) {
@@ -445,6 +444,7 @@ function mysql_fetch_all($res) {
 
 /* -- Log --------------------------------
 
+[2011-10-26 19:13:48] jQuery version update, removed broken css ref
 [2011-10-06 16:07:34] removed str_split() and file_put_contents() (Welcome to 2004!)
 [2009-10-06 17:45:34] added stripslashes_array($array)
 [2009-01-03 13:14:22] pageStart now comes with jQuery.
