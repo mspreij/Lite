@@ -33,10 +33,10 @@ if (! $act) $messages[] = "Welcome to Lite®!\n"; // todo: check and warn for in
 if ($db) {
 	if (mysql_select_db($db)) {
 		// good
-		if ($table) {
-			if ($tables = fetch_rows("SHOW TABLES")) {
-				unnest_array($tables);
-				if (! in_array($table, $tables)) {
+		if ($table_statuses = fetch_rows("SHOW table status")) { // [2012-01-10 19:42:15]
+			$table_statuses = array_map('lower_keys', key_unnest($table_statuses));
+			if ($table) {
+				if (! in_array($table, array_keys($table_statuses))) {
 					trigger_error("table '$table' not in table list", E_USER_WARNING);
 					unset($table);
 				}
@@ -152,6 +152,8 @@ if ($act) {
 <?php
 /* -- Log --------------------------------
 
+[2012-01-10 19:42:15] *cough* applied "SHOW table status" in favor of "SHOW tables" to also get comments (see TS). (also: which vpad, wtf?)
+                      This thing needs overhauling /so badly/
 [2008-12-20 21:41:57] See vpad.
 
 */ ?>

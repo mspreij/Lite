@@ -20,14 +20,13 @@
  * stripslashes_array($array)                                      
  *                                                                 
  * -- MySQL Functions --                                           
+ * 
  * fetch_field($sql)                                               
  * fetch_row($sql)                                                 
  * fetch_rows($sql)                                                
- * mysql_fetch_all($res)                                           
- * 
+ * mres($string)                                                   
  * 
 **/
-
 
 #____________________ May need updating?
 #  pageStart($list) /
@@ -342,12 +341,26 @@ function unnest_array(&$arr, $return=false) {
 }
 
 
-#________________________________________
-# key_unnest($arr, $first_only = false) /
+//________________________________________
+// key_unnest($arr, $first_only = false) /
 function key_unnest($arr, $first_only = false) {
 	foreach($arr as $row) {
 		$key = array_shift($row);
 		$out[$key] = $first_only ? array_shift($row) : $row;
+	}
+	return $out;
+}
+
+
+//_____________________
+// lower_keys($array) /
+function lower_keys($array) {
+	if (! is_array($array)) {
+		trigger_error('Input not array: '. var_export($array, 1) .', returning as-is', 'E_USER_WARNING');
+		return $array;
+	}
+	foreach ($array as $key => $value) {
+		$out[strtolower($key)] = $value;
 	}
 	return $out;
 }
@@ -399,51 +412,52 @@ function popup_link($link, $label, $width=300, $height=300, $options='') {
 
 
 
-# -- MySQL Functions ---------------------
+// -- MySQL Functions ---------------------
 
 
-#____________________ 'Coz I Can.
-# fetch_field($sql) /
+//____________________ 'Coz I Can.
+// fetch_field($sql) /
 function fetch_field($sql) {
-	if ($row = fetch_row($sql)) return array_shift($row);
-	return $row;
+  if ($row = fetch_row($sql)) return array_shift($row);
+  return $row;
 }
 
 
-#__________________
-# fetch_row($sql) /
+//__________________
+// fetch_row($sql) /
 function fetch_row($sql) {
-	$res = mysql_query($sql);
-	if ($error_msg = mysql_error()) echo styledText($error_msg .'<br>', 'red');
-	if (! $res) return false;                # return false for error
-	if (mysql_num_rows($res) == 0) return 0; # 0 for 0 found
-	return mysql_fetch_assoc($res);
+  $res = mysql_query($sql);
+  if ($error_msg = mysql_error()) echo "<span style='color: red;'>".$error_msg."<br></span>";
+  if (! $res) return false;                 // return false for error
+  if (mysql_num_rows($res) === 0) return 0; // 0 for 0 found
+  return mysql_fetch_assoc($res);
 }
 
 
-#___________________
-# fetch_rows($sql) /
+//___________________
+// fetch_rows($sql) /
 function fetch_rows($sql) {
-	$res = mysql_query($sql);
-	if ($error_msg = mysql_error()) echo styledText($error_msg .'<br>', 'red');
-	if (! $res) return false;                # return false for error
-	if (mysql_num_rows($res) == 0) return 0; # 0 for 0 found
-	return mysql_fetch_all($res);
+  $res = mysql_query($sql);
+  if ($error_msg = mysql_error()) echo "<span style='color: red;'>".$error_msg."<br></span>";
+  if (! $res) return false;                       // return false for error
+  if (mysql_num_rows($res) === 0) return array(); // array() for 0 found
+  $data = array();
+  while ($row = mysql_fetch_assoc($res)) $data[] = $row;
+  return $data;
 }
 
 
-#________________________
-# mysql_fetch_all($res) /
-function mysql_fetch_all($res) {
-	$data = array();
-	while ($row = mysql_fetch_assoc($res)) $data[] = $row;
-	return $data;
+//________________ 'Coz it's, like, shorter, yanno?
+// mres($string) /
+function mres($string) {
+  return mysql_real_escape_string($string);
 }
-
 
 
 /* -- Log --------------------------------
 
+[2012-01-10 19:41:01] Added lower_keys($array)
+[2012-01-10 19:12:51] Replaced fetch_* functions (mysql stuff)
 [2011-10-26 19:13:48] jQuery version update, removed broken css ref
 [2011-10-06 16:07:34] removed str_split() and file_put_contents() (Welcome to 2004!)
 [2009-10-06 17:45:34] added stripslashes_array($array)

@@ -62,3 +62,10 @@
 	font-size: .7em;
 	color: gray;
 }
+
+.tableComment {
+	color: blue; /* Yes. It is Blue. */
+}
+.tableComment span {
+	background: #A6D0FF;
+}
