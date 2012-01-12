@@ -41,7 +41,7 @@ if (! isset($_COOKIE['nemo'])) {
 //	die("Access Denied (c)");
 }
 // Check IP
-$valid_ips = array('10.0.0.10', '10.0.0.11', '::1', '94.212.35.52');
+$valid_ips = array('192.168.1.777');
 if (! in_array($_SERVER['REMOTE_ADDR'], $valid_ips)) {
 	die("Access Denied ({$_SERVER['REMOTE_ADDR']})");
 }
@@ -52,8 +52,7 @@ if (! in_array($_SERVER['REMOTE_ADDR'], $valid_ips)) {
 // Basic auth
 $u = @$_SERVER['PHP_AUTH_USER'];
 $p = @$_SERVER['PHP_AUTH_PW'];
-if    ((md5($u) != '21232f297a57a5a743894a0e4a801fc3') ||
-			 (md5($p) != '0ab7216733e50f535484119224b1d0cb')) {
+if    ((md5($u) != 'hash string') || (md5($p) != 'nother hash string')) {
 	header('WWW-Authenticate: Basic realm="LiteAdmin"');
 	header('HTTP/1.1 401 Unauthorized');
 	die("Access Denied (u/p)");
