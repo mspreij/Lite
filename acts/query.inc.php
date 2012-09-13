@@ -18,8 +18,12 @@ if ($type == 'resource') {
 	if ($res) {
 		$messages[] = styledText("Result: (bool) True.<br>\nWhatever you did, worked.<br>\n", '#003F96');
 	}else{
-		$messages[] = styledText("Error or no result.<br>\n". mysql_error(), 'red');
+		$messages[] = styledText("Error or no result.<br>\n". mysql_error() .' ('.mysql_errno().')', 'red');
 	}
 }
 
-?>
+/* -- Log --------------------------------
+
+[2012-03-28 02:10:31] added error numbers to error message
+
+*/

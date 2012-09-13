@@ -17,7 +17,7 @@ if ($pval) {
 	if (mysql_query($sql)) {
 		$messages[] = styledText("Record updated.<br>\n", 'blue');
 	}else{
-		$messages[] = styledText("Update failed: ". mysql_error()."<br>\n", 'red');
+		$messages[] = styledText("Update failed: ". mysql_error().' ('.mysql_errno().")<br>\n", 'red');
 	}
 }else{
 	$sql = insert_sql($table, $form_data);
@@ -25,14 +25,13 @@ if ($pval) {
 		$messages[] = styledText("Record created.<br>\n", 'green');
 		$pval = mysql_insert_id();
 	}else{
-		$messages[] = styledText("Insert failed: ". mysql_error()."<br>\n", 'red');
+		$messages[] = styledText("Insert failed: ". mysql_error().' ('.mysql_errno().")<br>\n", 'red');
 	}
 }
 
 /* -- Log --------------------------------
 
+[2012-03-28 02:10:31] added error numbers to messages
 [2009-09-27 16:35:51] added "$pval = mysql_insert_id();" on successful insert (from Iason, [2009-09-21 16:53:23])
 
 */
-
-?>

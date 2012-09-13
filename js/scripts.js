@@ -5,6 +5,13 @@ $(document).ready(function(){
   $('.toggle').click(function() {
     $('#'+$(this).data('target')).slideToggle();
   });
+  
+  // database select onchange
+  $('#databases select').on('change', function() {
+    var _this = $(this);
+    _this.closest('form').submit();
+  });
+  
 });
 
 
@@ -44,6 +51,7 @@ function confirmDelete() {
 
 /* -- Log --------------------------------
 
+[2012-09-13 20:26:58] Added: database select onchange = form-submit
 [2010-05-10 18:09:16] Added confirmDelete()
 [2009-01-03 13:16:42] Created.
 

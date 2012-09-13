@@ -110,10 +110,10 @@ echo "<div class='DbTableDiv'>";
 $db_list = list_dbs();
 
 if ($db) {
-	echo "<form action='$me' method='get' style='display: inline;'>\n";
+	echo "<form action='$me' method='get' style='display: inline;' id='databases'>\n";
 	selectList('db', $db_list, $db, 1);
 	echo 
-	 "<input type='submit' name='submit' value='Use'>
+	 "<input type='submit' value='Use'>
 	</form><br>\n";
 	list_tables($db, $table);
 }else{
@@ -152,6 +152,7 @@ if ($act) {
 <?php
 /* -- Log --------------------------------
 
+[2012-09-13 20:26:58] Added: database select onchange = form-submit
 [2012-01-10 19:42:15] *cough* applied "SHOW table status" in favor of "SHOW tables" to also get comments (see TS). (also: which vpad, wtf?)
                       This thing needs overhauling /so badly/
 [2008-12-20 21:41:57] See vpad.

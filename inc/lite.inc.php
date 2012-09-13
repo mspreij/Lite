@@ -41,7 +41,7 @@ if (! isset($_COOKIE['nemo'])) {
 //	die("Access Denied (c)");
 }
 // Check IP
-$valid_ips = array('10.0.0.10', '10.0.0.11', '::1', '94.212.35.52');
+$valid_ips = array('192.168.1.10', '82.73.20.238');
 if (! in_array($_SERVER['REMOTE_ADDR'], $valid_ips)) {
 	die("Access Denied ({$_SERVER['REMOTE_ADDR']})");
 }
