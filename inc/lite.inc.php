@@ -29,7 +29,7 @@ Then, server/username/password to connect to database are required.
 
 
 ini_set('display_errors', '1');
-error_reporting(E_ALL);
+error_reporting(-1);
 
 ob_start();
 
@@ -68,7 +68,7 @@ if (! $connected) {
 		$kookie = befuddle($kookie, md5($u.$p), 0);
 		if ($arr = unserialize($kookie)) {
 			extract($arr);
-			if (mysql_connect($server, $username, $password)) {
+			if (@mysql_connect($server, $username, $password)) {
 				$connected = true;
 			}else {
 				$messages[] = styledText("Error logging into {$arr['server']} with {$arr['username']} (from cookie)", 'red');
@@ -155,7 +155,8 @@ function db_and_table() {
 //_____________
 // list_dbs() /
 function list_dbs() {
-	$db_tmp = unnest_array(fetch_rows("SHOW DATABASES"), true);
+	$rows = fetch_rows("SHOW DATABASES");
+	$db_tmp = unnest_array($rows, true);
 	foreach($db_tmp as $dbase) {
 		$db_list[$dbase] = $dbase .' ('. (($tmp = fetch_rows("SHOW tables FROM `$dbase`")) ? count($tmp) : $tmp ) .')';
 	}

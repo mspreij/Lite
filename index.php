@@ -6,6 +6,7 @@ $page_arr['stylesheet'][] = 'css/style.css';
 $page_arr['stylesheet'][] = 'css/date_input.css';
 $page_arr['js_include'][] = 'js/jquery.date_input.js';
 $page_arr['js_include'][] = 'js/scripts.js';
+if ($_SERVER['HTTP_HOST'] == 'lite.xubuntu') $page_arr['body'] = 'style="background: #9DB5FE;"';
 if (isset($_POST['query'])) $page_arr['body'] = "onload=\"$('#queryInput').focus();\"";
 
 pageStart($page_arr);
