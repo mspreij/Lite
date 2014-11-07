@@ -1,2 +1,4 @@
 This is a pretty barebones MySQL browser, only really useful if you know SQL well enough to create/alter tables etc.
 The idea is that at some point it'll make more things easier.
+
+MySQL might still exist, at that point.
