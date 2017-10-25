@@ -4,8 +4,6 @@
 $view = 'edit';
 $act  = 'edit';
 $form_data = @$_POST['form_data'];
-// var_export($_POST);
-// die();
 if (! is_array($form_data)) {
     throw new Exception('Error: incoming form data not array', 1);
 }
