@@ -1,4 +1,8 @@
-This is a pretty barebones MySQL browser, only really useful if you know SQL well enough to create/alter tables etc.
-The idea is that at some point it'll make more things easier.
+If you're reading this I must've uploaded it to Github again which means I got it working.
 
-MySQL might still exist, at that point.
+It's still god-awful code, Not for production. ..or for development.
+
+Maybe not for running at all.
+
+
+Use Adminer instead: https://www.adminer.org/

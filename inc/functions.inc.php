@@ -415,42 +415,31 @@ function popup_link($link, $label, $width=300, $height=300, $options='') {
 // -- MySQL Functions ---------------------
 
 
-//____________________ 'Coz I Can.
-// fetch_field($sql) /
+// fetch_field($sql)
 function fetch_field($sql) {
-  if ($row = fetch_row($sql)) return array_shift($row);
-  return $row;
+    $conn = new_db();
+    return ($result = $conn->query($sql)->fetch(PDO::FETCH_ASSOC)) ? array_shift($result) : $result;
 }
 
-
-//__________________
-// fetch_row($sql) /
+// fetch_row($sql)
 function fetch_row($sql) {
-  $res = mysql_query($sql);
-  if ($error_msg = mysql_error()) echo "<span style='color: red;'>".$error_msg."<br></span>";
-  if (! $res) return false;                 // return false for error
-  if (mysql_num_rows($res) === 0) return 0; // 0 for 0 found
-  return mysql_fetch_assoc($res);
+    $conn = new_db();
+    return $conn->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
 
-
-//___________________
-// fetch_rows($sql) /
+// fetch_rows($sql)
 function fetch_rows($sql) {
-  $res = mysql_query($sql);
-  if ($error_msg = mysql_error()) echo "<span style='color: red;'>".$error_msg."<br></span>";
-  if (! $res) return false;                       // return false for error
-  if (mysql_num_rows($res) === 0) return array(); // array() for 0 found
-  $data = array();
-  while ($row = mysql_fetch_assoc($res)) $data[] = $row;
-  return $data;
+    $conn = new_db();
+    $data = [];
+    $stmt = $conn->query($sql);
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) $data[] = $row;
+    return $data;
 }
 
-
-//________________ 'Coz it's, like, shorter, yanno?
-// mres($string) /
+// mres($string)
 function mres($string) {
-  return mysql_real_escape_string($string);
+    $conn = new_db();
+    return $conn->quote($string);
 }
 
 

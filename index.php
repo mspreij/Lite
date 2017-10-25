@@ -32,21 +32,21 @@ $show_rows         = 20;
 if (! $act) $messages[] = "Welcome to Lite®!\n"; // todo: check and warn for invalid act
 
 if ($db) {
-	if (mysql_select_db($db)) {
-		// good
-		if ($table_statuses = fetch_rows("SHOW table status")) { // [2012-01-10 19:42:15]
-			$table_statuses = array_map('lower_keys', key_unnest($table_statuses));
-			if ($table) {
-				if (! in_array($table, array_keys($table_statuses))) {
-					trigger_error("table '$table' not in table list", E_USER_WARNING);
-					unset($table);
-				}
-			}
-		}
-	}else{
-		$messages[] = styledText("No valid database provided.<br>\n", 'red');
-		$db = '';
-	}
+    if ($pdo = new_db()) {
+        // good
+        if ($table_statuses = fetch_rows("SHOW table status FROM $db")) { // [2012-01-10 19:42:15]
+            $table_statuses = array_map('lower_keys', key_unnest($table_statuses));
+            if ($table) {
+                if (! in_array($table, array_keys($table_statuses))) {
+                    trigger_error("table '$table' not in table list", E_USER_WARNING);
+                    unset($table);
+                }
+            }
+        }
+    }else{
+        $messages[] = styledText("No valid database provided.<br>\n", 'red');
+        $db = '';
+    }
 }
 if (DEBUG) {
 	foreach(explode(' ', 'db table act view page pval') as $field) echo " | $field: <strong>{$$field}</strong>";
@@ -67,10 +67,10 @@ if ($table) {
 
 # Poor man's try/catch through the acts:
 
-do {                                                                    // •• Act is ...
+try {                                                                    // •• Act is ...
 	if (! db_and_table()) {
-		// $messages[] = styledText("Missing table or db.<br>\n", 'red');
-		break;
+		throw new Exception("Missing table or db.<br>\n", 1);
+		
 	}
 	if ($act == 'delete') {                                               // •• Delete
 		require_once './acts/delete.inc.php';
@@ -96,8 +96,9 @@ do {                                                                    // •�
 	if ($act == 'showcreate') {                                           // •• what the /hell/ was I thinking?
 		require_once './acts/showcreate.inc.php';
 	}
-} while (false);
-
+} catch (Exception $e) {
+    $messages[] = styledText($e->getMessage(), 'red');
+}
 
 # act 'query' is a special case, it can be valid without a specified database or table
 if ($act == 'query') {

@@ -2,27 +2,27 @@
 
 echo 
  "<form method='post'>
-	<input type='hidden' name='db' value='$db'>
-	<input type='hidden' name='table' value='$table'>
-	<input type='hidden' name='pval' value='$pval'>
-	<input type='hidden' name='act' value='save'>
-	<table class='editTable'><tr><td colspan='2'>\n";
-	// todo: write and call prev_next_record($pval)..
+    <input type='hidden' name='db' value='$db'>
+    <input type='hidden' name='table' value='$table'>
+    <input type='hidden' name='pval' value='$pval'>
+    <input type='hidden' name='act' value='save'>
+    <table class='editTable'><tr><td colspan='2'>\n";
+    // todo: write and call prev_next_record($pval)..
 echo "</td></tr>\n";
 
 foreach(key_unnest($table_structure) as $name => $props) {
-	inputrow($name, $props);
+    inputrow($name, $props);
 }
 
 $delete_link = "$me?db=$db&table=$table&act=delete&view=$view&page=$page&pval=$pval";
 
 echo 
-	"<tr><td colspan='2'>
-		<input type='submit' name='some_name' value='Update' id='some_name'>
-		<input type='button' name='delete' value='Delete' id='delete' onclick='if (confirm(\"Delete Record?\")) {location.href=\"$delete_link\";}'>
-	</td></tr>
-	</table>
-	</form>\n";
+   "<tr><td colspan='2'>
+        <input type='submit' name='some_name' value='Update' id='some_name'>
+    <input type='button' name='delete' value='Delete' id='delete' onclick='if (confirm(\"Delete Record?\")) {location.href=\"$delete_link\";}'>
+    </td></tr>
+    </table>
+    </form>\n";
 
 #__________________________
 # inputrow($name, $props) /

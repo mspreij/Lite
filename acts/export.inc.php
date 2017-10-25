@@ -1,6 +1,8 @@
 <?php
 # /acts/export.inc.php
 
+throw new Exception("couldn't be bothered to get this to work, sorry", 1);
+
 if ($data = fetch_row("SHOW CREATE TABLE $table")) {
   $data = $data['Create Table'];
   $sql_export = substr_replace($data, ' IF NOT EXISTS ', 12, 0).";\n\n";
@@ -34,8 +36,7 @@ if ($data = fetch_row("SHOW CREATE TABLE $table")) {
 
 /* -- Log --------------------------------
 
-
+[2017-10-26 01:03:58] Disabled
 [2009-04-01 12:46:19] Created
 
 */
-?>
