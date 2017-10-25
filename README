@@ -1,8 +1,11 @@
-If you're reading this I must've uploaded it to Github again which means I got it working.
+If you're reading this I must've uploaded it to Github again which means I got it working (mostly).
 
 It's still god-awful code, Not for production. ..or for development.
 
 Maybe not for running at all.
-
-
 Use Adminer instead: https://www.adminer.org/
+
+The garbage-name file being requested is a simple return-delimited file holding servernames.
+It's a rubbish name you can change to something else so people who somehow have access to that directory can't guess your servernames (yes, it's a rubbish method)
+
+The auth.inc.php file can filter on ip or whatever.
