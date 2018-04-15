@@ -1,4 +1,4 @@
-<?php
+<?php // mech edit
 require_once './inc/lite.inc.php';
 
 $page_arr['title'] = 'Lite!®';
